@@ -1,0 +1,23 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras</title>
+</head>
+<body>
+    <h1>Productossss</h1>
+    <ul>
+        {% for producto in productos %}
+            <li>
+                {{ producto.nombre }} - ${{ producto.precio }}
+                <form action="/agregar/{{ producto.id }}" method="post">
+                    <input type="number" name="cantidad" value="1" min="1">
+                    <button type="submit">Agregar al carrito</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

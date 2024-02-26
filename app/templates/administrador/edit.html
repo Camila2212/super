@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Editar Administrador</title>
+</head>
+<body>
+    <h1>Editar Administrador</h1>
+    <form action="{{ url_for('administrador.edit', idAdmin=administrador.idAdmin) }}" method="post">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" value="{{ administrador.nombre }}" required>
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" name="apellido" value="{{ administrador.apellido }}" required>
+        <label for="cedula">Cedula:</label>
+        <input type="text" id="cedula" name="cedula" value="{{ administrador.cedula }}" required>
+        <label for="telefono">Telefono:</label>
+        <input type="text" id="telefono" name="telefono" value="{{ administrador.telefono }}" required>
+        <label for="correo">Correo:</label>
+        <input type="text" id="correo" name="correo" value="{{ administrador.correo }}" required>
+        <label for="direccion">Dirección:</label>
+        <input type="text" id="direccion" name="direccion" value="{{ administrador.direccion }}" required>
+        <label for="clave">Contraseña:</label>
+        <input type="text" id="clave" name="clave" value="{{ administrador.clave }}" required>
+
+        <button type="submit">Actualizar Administrador</button>
+    </form>
+</body>
+</html>

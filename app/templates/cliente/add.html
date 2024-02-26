@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/registro.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+    <script src="{{ url_for('static', filename='jQuery/jquery-3.7.1.js')}}"></script>
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> -->
+    <title>Agregar Cliente</title>
+
+</head>
+
+<body>
+    <style>
+        .midiv{
+            margin-right: 20px;
+        }
+    @media screen and (max-width: 525px) {
+    /* Cambiar el diseño del formulario para dispositivos pequeños */
+    .miform {
+        flex-direction: column;
+        align-items: center; /* Centrar elementos horizontalmente */
+    }
+    
+    .midiv{
+        margin-right: 0px;
+    }
+    /* Ajustar el ancho de los elementos del formulario */
+    .register-form > div {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 20px; /* Agrega un margen inferior entre elementos */
+    }
+    .register-container{
+        max-width: 96%;
+    }
+}
+    </style>
+    <nav class="navbar navbar-dark " aria-label="First navbar example">
+        <div class="container-fluid">
+
+            <div id="nSuper">
+                <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48">
+                    <path
+                        d="M42 22.05V39q0 1.2-.9 2.1-.9.9-2.1.9H8.95q-1.2 0-2.1-.9-.9-.9-.9-2.1V22.05q-1.4-1.2-1.85-2.95-.45-1.75.1-3.5l2.15-6.75q.4-1.35 1.4-2.1 1-.75 2.3-.75H37.7q1.4 0 2.45.775 1.05.775 1.45 2.075l2.2 6.75q.55 1.75.075 3.5Q43.4 20.85 42 22.05ZM28.5 20.5q1.45 0 2.45-.95 1-.95.8-2.3L30.5 9h-5v8.25q0 1.3.85 2.275.85.975 2.15.975Zm-9.35 0q1.4 0 2.375-.95.975-.95.975-2.3V9h-5l-1.25 8.25q-.2 1.3.7 2.275.9.975 2.2.975Zm-9.1 0q1.2 0 2.075-.825.875-.825 1.025-2.025L14.45 9h-5l-2.3 7.3q-.5 1.55.4 2.875t2.5 1.325Zm27.85 0q1.6 0 2.525-1.3.925-1.3.425-2.9L38.55 9h-5l1.3 8.65q.15 1.2 1.025 2.025.875.825 2.025.825ZM8.95 39H39V23.45q.05.05-.325.05H37.9q-1.25 0-2.375-.525T33.3 21.35q-.8 1-2 1.575t-2.65.575q-1.5 0-2.575-.425Q25 22.65 24 21.65q-.75.9-1.9 1.375t-2.6.475q-1.55 0-2.75-.55t-2.05-1.6q-1.2 1.05-2.35 1.6-1.15.55-2.3.55h-.675q-.325 0-.425-.05V39ZM39 39H8.95 39Z" />
+                </svg>
+                <h3 style="margin-top: 9px;">Metrópolis</h3>
+            </div>
+
+        </div>
+    </nav>
+
+    <div class="register-container">
+        <div class="deco-circle"></div>
+        <div class="register-header">REGISTRARSE</div>
+
+
+        <form method="POST" action="{{ url_for('cliente.add') }}" class="register-form" onsubmit="return verificarContrasenas()">
+            <div style="display: flex; justify-content: center;" class="miform">
+                <div class="midiv" >
+
+
+                    <!-- Nombre -->
+                    <div>
+                        <div class="input-group">
+                            <span class="icon-container">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-person-circle" viewBox="0 0 16 16">
+                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                                    <path fill-rule="evenodd"
+                                        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+                                </svg>
+
+                            </span>
+                            <input type="text" id="nombre" name="nombre" placeholder="Escribe tu nombre"
+                                class="input block mt-1 w-full" : onfocus="clearNameValue()" required>
+                        </div>
+                    </div>
+
+                    <!-- Apellido -->
+                    <div>
+                        <div class="input-group">
+                            <span class="icon-container">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-person-fill" viewBox="0 0 16 16">
+                                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                                </svg>
+                            </span>
+                            <input type="text" id="apellido" name="apellido" placeholder="Escribe tu apellido"
+                                class="input block mt-1 w-full" onfocus="clearApellidodValue('apellido')" required>
+                        </div>
+                    </div>
+
+                    <!-- Cedula -->
+                    <div>
+                        <div class="input-group">
+                            <span class="icon-container">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-hash" viewBox="0 0 16 16">
+                                    <path
+                                        d="M8.39 12.648a1 1 0 0 0-.015.18c0 .305.21.508.5.508.266 0 .492-.172.555-.477l.554-2.703h1.204c.421 0 .617-.234.617-.547 0-.312-.188-.53-.617-.53h-.985l.516-2.524h1.265c.43 0 .618-.227.618-.547 0-.313-.188-.524-.618-.524h-1.046l.476-2.304a1 1 0 0 0 .016-.164.51.51 0 0 0-.516-.516.54.54 0 0 0-.539.43l-.523 2.554H7.617l.477-2.304c.008-.04.015-.118.015-.164a.51.51 0 0 0-.523-.516.54.54 0 0 0-.531.43L6.53 5.484H5.414c-.43 0-.617.22-.617.532s.187.539.617.539h.906l-.515 2.523H4.609c-.421 0-.609.219-.609.531s.188.547.61.547h.976l-.516 2.492c-.008.04-.015.125-.015.18 0 .305.21.508.5.508.265 0 .492-.172.554-.477l.555-2.703h2.242zm-1-6.109h2.266l-.515 2.563H6.859l.532-2.563z" />
+                                </svg>
+                            </span>
+                            <input type="text" id="cedula" name="cedula" placeholder="Escribe tu cédula"
+                                class="input block mt-1 w-full" onfocus="clearFieldValue('cedula')" required>
+                        </div>
+                    </div>
+
+                    <!-- Telefono -->
+                    <div>
+                        <div class="input-group">
+                            <span class="icon-container">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-phone" viewBox="0 0 16 16">
+                                    <path
+                                        d="M11 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM5 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
+                                    <path d="M8 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2" />
+                                </svg>
+                            </span>
+                            <input type="text" id="telefono" name="telefono" placeholder="Escribe tu teléfono"
+                                class="input block mt-1 w-full" onfocus="clearFieldValue('telefono')" required>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <!-- Correo -->
+                    <div>
+                        <div class="input-group">
+                            <span class="icon-container">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-person-check-fill" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M15.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L12.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
+                                    <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                                </svg>
+                            </span>
+                            <input type="email" id="correo" name="correo" placeholder="Escribe tu correo electrónico"
+                                class="input block mt-1 w-full" onfocus="clearFieldValue('correo')" required>
+                        </div>
+                    </div>
+
+                    <!-- Dirección -->
+                    <div>
+                        <div class="input-group">
+                            <span class="icon-container">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-geo-alt" viewBox="0 0 16 16">
+                                    <path
+                                        d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10" />
+                                    <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                                </svg>
+                            </span>
+                            <input type="text" id="direccion" name="direccion" placeholder="Escribe tu dirección"
+                                class="input block mt-1 w-full" onfocus="clearFieldValue('direccion')" required>
+                        </div>
+                    </div>
+                    <!-- Contraseña -->
+<div style="position: relative;">
+    <div class="input-group" style="position: relative;">
+        <span class="icon-container">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-key-fill" viewBox="0 0 16 16">
+                <path
+                    d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2zM2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2" />
+            </svg>
+        </span>
+        <input type="password" id="clave" name="clave" placeholder="Escribe tu contraseña"
+            class="input block w-full" required autocomplete="current-password"
+            onfocus="showPassword()" onblur="hidePassword()" />
+        <span class="icon-container1" onclick="togglePassword()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-eye-fill" viewBox="0 0 16 16" id="eye-icon">
+                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
+                <path
+                    d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
+            </svg>
+        </span>
+    </div>
+</div>
+
+<!-- Comprobar Contraseña -->
+<div style="position: relative;">
+    <div class="input-group" style="position: relative;">
+        <span class="icon-container">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-key-fill" viewBox="0 0 16 16">
+                <path
+                    d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2zM2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2" />
+            </svg>
+        </span>
+        <input type="password" id="clave1" name="clave1" placeholder="Repite tu contraseña"
+            class="input block w-full" required autocomplete="current-password"
+            onfocus="showPassword()" onblur="hidePassword()" />
+        <span class="icon-container1" onclick="togglePassword1()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-eye-fill" viewBox="0 0 16 16" id="eye-icon">
+                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
+                <path
+                    d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
+            </svg>
+        </span>
+    </div>
+</div>
+                </div>
+            </div>
+            <button type="submit" class="register-button">Registrarse</button>
+
+            <div class="login-link">
+                <a href="{{ url_for('auth.login') }}" class="login-link" onclick="toggleOverlay()">
+                    ¿Ya tienes una cuenta? Inicia Sesión
+                </a>
+            </div>
+
+        </form>
+    </div>
+
+    <script>
+        function toggleOverlay() {
+            const registerContainer = document.querySelector('.register-container');
+            registerContainer.classList.toggle('show-overlay');
+        }
+
+        $(document).ready(function () {
+            $('#showPassword').change(function () {
+                var passwordField = $('#clave');
+                var fieldType = $(this).is(':checked') ? 'text' : 'clave';
+                passwordField.attr('type', fieldType);
+            });
+        });
+
+
+        x
+
+
+
+        function showPassword() {
+            var passwordInput = document.getElementById('clave');
+            if (passwordInput.value === 'Escribe tu contraseña') {
+                passwordInput.value = '';
+            }
+            passwordInput.type = 'password';
+
+        }
+
+        function hidePassword() {
+            var passwordInput = document.getElementById('clave');
+            if (passwordInput.value === '') {
+                passwordInput.value = 'Escribe tu contraseña';
+                passwordInput.type = 'text';
+            }
+
+        }
+
+        function togglePassword() {
+            var passwordInput = document.getElementById('clave'); // Aquí cambio 'password' a 'clave'
+            var eyeIcon = document.getElementById('eye-icon');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                eyeIcon.innerHTML = `
+            <path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588M5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z"/>
+            <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12z"/>
+        `;
+            } else {
+                passwordInput.type = 'password';
+                eyeIcon.innerHTML = `
+            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+            <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+        `;
+            }
+        }
+
+
+        function togglePassword1() {
+            var passwordInput = document.getElementById('clave1'); // Aquí cambio 'password' a 'clave'
+            var eyeIcon = document.getElementById('eye-icon');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                eyeIcon.innerHTML = `
+            <path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588M5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z"/>
+            <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12z"/>
+        `;
+            } else {
+                passwordInput.type = 'password';
+                eyeIcon.innerHTML = `
+            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+            <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+        `;
+            }
+        }
+
+
+        function showPassword1() {
+            var passwordInput = document.getElementById('clave1');
+            if (passwordInput.value === 'Escribe tu contraseña') {
+                passwordInput.value = '';
+            }
+            passwordInput.type = 'password';
+
+        }
+
+        function hidePassword1() {
+            var passwordInput = document.getElementById('clave1');
+            if (passwordInput.value === '') {
+                passwordInput.value = 'Escribe tu contraseña';
+                passwordInput.type = 'text';
+            }
+
+        }
+
+        function verificarContrasenas() {
+        var password1 = document.getElementById('clave').value;
+        var password2 = document.getElementById('clave1').value;
+
+        if (password1 !== password2) {
+            alert("Las contraseñas no coinciden");
+            return false;
+        }
+        return true;
+    }
+
+    </script>
+</body>
+
+</html>

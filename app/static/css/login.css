@@ -1,0 +1,244 @@
+        .input-group {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .icon-container {
+            display: flex;
+            align-items: center;
+            margin-right: 10px;
+            /* Espaciado entre el icono y el campo de entrada */
+        }
+
+        .icon-container svg {
+            width: 20px;
+            /* Ajusta el tamaño del icono según tus preferencias */
+            height: 20px;
+            fill: #c4c4c4;
+            /* Color del icono */
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            background: linear-gradient(to right, #ffffff, #c3c3c3);
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        .navbar {
+            width: 100%;
+            padding: 20px 0;
+            background: linear-gradient(to right, #ffffff, #c3c3c3);
+            color: rgb(0, 0, 0);
+            /* Cambia el color del texto según tus preferencias */
+            text-align: center;
+        }
+        
+
+        .login-container {
+            background-color: #000000;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            max-width: 100%;
+            padding-top: 48px;
+            padding-bottom: 48px;
+            margin-top: 20px;
+            /* Espacio entre el navbar y el formulario */
+            transition: all 0.3s ease;
+            /* Agregamos una transición suave */
+        }
+
+        /* Media query para pantallas grandes */
+        @media screen and (min-width: 768px) {
+            .login-container {
+                padding: 60px;
+            }
+        }
+
+        /* Media query para pantallas pequeñas (móviles) */
+        @media screen and (max-width: 767px) {
+            .login-container {
+                padding-left: 7%;
+                padding-right: 7%;
+            }
+        }
+
+        .login-container:hover {
+            transform: scale(1.02);
+            /* Un pequeño aumento en escala al pasar el ratón */
+        }
+
+        .login-header {
+            color: #b7b7b7;
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+            /* Centra el texto */
+        }
+
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+
+
+        .login-button {
+            background-color: #dfdfdf;
+            color: #000000;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-button:hover {
+            background-color: #979696;
+
+        }
+
+        .signup-link {
+            margin-top: 8px;
+            color: #b1b1b1;
+            cursor: pointer;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .signup-link:hover {
+            color: #ffffff;
+        }
+
+        .deco-circle {
+            position: absolute;
+            background-color: #b0b0b0e6;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            top: -80px;
+            right: -80px;
+            opacity: 0.4;
+            animation: moveCircle 8s infinite linear;
+        }
+
+        @keyframes moveCircle {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            25% {
+                transform: translate(150px, 50px);
+            }
+
+            50% {
+                transform: translate(0, 0);
+            }
+
+            75% {
+                transform: translate(-150px, 50px);
+            }
+
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+
+
+
+        label {
+            font-size: 15px;
+            margin-bottom: 5px;
+            color: #333;
+            flex: 1;
+            margin-right: 50px;
+            /* Ocupa el espacio disponible */
+        }
+
+        .input {
+            width: 250px;
+            padding-left: 15px;
+            padding-right: 15px;
+            padding-bottom: 10px;
+            padding-top: 10px;
+            /* Ajusta el padding */
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+            /* Quitamos el borde al enfocar el campo */
+        }
+
+        .miinput {
+            width: 250px;
+            padding-left: 15px;
+            padding-right: 15px;
+            padding-bottom: 10px;
+            padding-top: 10px;
+            /* Ajusta el padding */
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+            /* Quitamos el borde al enfocar el campo */
+        }
+
+        .input:focus {
+            border-color: #26ff00;
+            /* Color de contorno al enfocar el campo */
+        }
+
+        hr {
+            opacity: 0.4;
+            /* Ajusta el nivel de transparencia según sea necesario */
+            border: none;
+            height: 1px;
+            background-color: #ddd;
+            /* Puedes ajustar el color según tus preferencias */
+            margin-bottom: 25px;
+
+            /* Ajusta el margen según sea necesario */
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+        }
+
+        .icon-container1 {
+            display: flex;
+            align-items: center;
+            margin-left: -30px;
+            /* Ajusta el espacio entre el ícono y el campo de entrada */
+            opacity: 0.7;
+            /* Opacidad del ícono de ojo */
+            cursor: pointer;
+        }
+
+        .icon-container1 svg {
+            width: 20px;
+            /* Ajusta el tamaño del ícono según tus preferencias */
+            height: 20px;
+            fill: #333;
+            /* Color del ícono */
+        }
+
+        #nSuper {
+            display: flex;
+            margin-right: 90px;
+            font-size: 30px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }

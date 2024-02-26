@@ -1,0 +1,186 @@
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            background: linear-gradient(to right, #ffffff, #c3c3c3);
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        .navbar {
+            width: 100%;
+            padding: 20px 0;
+            background: linear-gradient(to right, #ffffff, #c3c3c3);
+            color: rgb(0, 0, 0); /* Cambia el color del texto según tus preferencias */
+            text-align: center;
+        }
+
+        .register-container {
+            background-color: #000000;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            width: 680px;
+            max-width: 100%;
+            margin-top: 20px; /* Espacio entre el navbar y el formulario */
+            transition: all 0.3s ease; /* Agregamos una transición suave */
+            padding-top: 48px;
+            padding-bottom: 48px;
+        }
+
+        
+        .register-container:hover {
+            transform: scale(1.02); /* Un pequeño aumento en escala al pasar el ratón */
+            transform-origin: center;
+        }
+
+        .register-header {
+            color: #b7b7b7;
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .register-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        label {
+            font-size: 15px;
+            margin-bottom: 5px;
+            color: #333;
+            flex: 1;
+            margin-right: 50px;
+        }
+
+        .input {
+            width: 250px;
+            margin-bottom: 15px;
+            padding-left: 15px;
+            padding-right: 15px;
+            padding-bottom: 10px;
+            padding-top: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none; /* Quitamos el borde al enfocar el campo */
+
+        }
+
+        .input:focus {
+            border-color: #26ff00; /* Color de contorno al enfocar el campo */
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+        }
+
+        .icon-container {
+            display: flex;
+            align-items: center;
+            margin-right: 10px;
+        }
+
+        .icon-container svg {
+            width: 20px;
+            height: 20px;
+            fill: #c4c4c4;
+
+        }
+
+        .register-button {
+            background-color: #dfdfdf;
+            color: #000000;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .register-button:hover {
+            background-color: #979696;
+
+        }
+
+        .login-link {
+            margin-top: 8px;
+            color: #b1b1b1;
+            cursor: pointer;
+            font-size: 16px;
+            transition: color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .login-link:hover {
+            color: #ffffff;
+        }
+
+        .deco-circle {
+            position: absolute;
+            background-color: #b0b0b0e6;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            top: -80px;
+            right: -80px;
+            opacity: 0.4;
+            animation: moveCircle 8s infinite linear;
+        }
+
+        @keyframes moveCircle {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            25% {
+                transform: translate(150px, 50px);
+            }
+
+            50% {
+                transform: translate(0, 0);
+            }
+
+            75% {
+                transform: translate(-150px, 50px);
+            }
+
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+
+        .icon-container1{
+        position: absolute;
+        top: 31%;
+        right: 15px;
+        transform: translateY(-38%);
+        cursor: pointer;
+        }
+
+        .icon-container1 svg {
+            width: 20px;
+            height: 20px;
+            fill: #333;
+        }
+    
+        #nSuper {
+            display: flex;
+            margin-right: 90px;
+            font-size: 30px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+            
+       

@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+    <script src="{{ url_for('static', filename='jQuery/jquery-3.7.1.js')}}"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        .miForm2{
+            display: flex;
+    justify-content: center;
+    margin-bottom: 17px;
+        }
+        #card-container {
+            margin-top: 1rem;
+        }
+
+        #search-results-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            /* Por defecto, las filas se alinearán a la izquierda */
+            margin-top: 20px;
+            /* Ajusta el margen superior según sea necesario */
+            margin-left: 50px;
+        }
+
+        /* Estilo para la primera fila */
+        #search-results-row .first-row {
+            justify-content: center;
+            /* Centra las tarjetas en la primera fila */
+            width: 100%;
+            /* Ocupa todo el ancho disponible */
+        }
+
+        /* Estilo para las tarjetas de búsqueda */
+        #search-results-row .card {
+            width: calc(18.666% - 10px);
+            margin-right: 10px;
+            margin-bottom: 10px;
+            margin-left: 10px;
+        }
+
+        .miCard .card {
+            width: 15%;
+            /* Ancho del 20% para que haya cinco tarjetas por fila */
+            margin-right: 20px;
+            /* Margen derecho para separar las tarjetas */
+            margin-bottom: 20px;
+            /* Margen inferior para separar las filas */
+            float: left;
+            /* Para que las tarjetas se alineen en una fila */
+        }
+
+        /* Limpiar el margen derecho de la última tarjeta en cada fila */
+        .miCard .card:nth-child(6n) {
+            margin-right: 0;
+        }
+
+        /* Limpiar flotación después de la última tarjeta en cada fila */
+        .miCard:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .table {
+            width: 100%;
+            border: 1px solid #ddd;
+        }
+
+        /* Estilo para las celdas de la tabla */
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        /* Estilo para las filas pares */
+        tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* Estilo para las celdas de acciones */
+        td a {
+            text-decoration: none;
+            padding: 4px 8px;
+            border: 1px solid #ddd;
+            margin-right: 4px;
+            border-radius: 4px;
+            color: #333;
+        }
+
+        /* Estilo para los botones de acciones */
+        .btn {
+            font-size: 14px;
+            padding: 6px 12px;
+        }
+
+        .btn-custom {
+            background-color: #000;
+        }
+
+        .btn-custom:hover {
+            background-color: red;
+            /* Cambia a rojo cuando el mouse pasa sobre el botón */
+        }
+
+        .btn-custom-edit {
+            background-color: #898989;
+            /* Color gris */
+            color: #fff;
+            /* Color del texto */
+        }
+
+        .btn-custom-edit:hover {
+            background-color: #007bff;
+            /* Cambia a color primary al pasar el mouse */
+        }
+
+        .btn-custom-add {
+            background-color: #000000;
+            /* Color gris */
+            color: #fff;
+            /* Color del texto */
+        }
+
+        .btn-custom-add:hover {
+            background-color: #777777;
+            /* Cambia a color primary al pasar el mouse */
+        }
+
+        /* Estilos para pantallas grandes */
+        @media (min-width: 768px) {
+            .navbar-nav {
+                display: flex;
+                justify-content: center;
+            }
+
+            .navbar-nav .nav-link {
+                padding-right: 1rem;
+                padding-left: 1rem;
+            }
+        }
+
+        /* Estilos para pantallas pequeñas */
+        @media (max-width: 525px) {
+            .miCard .card {
+                width: 90%;
+                /* Ancho del 20% para que haya cinco tarjetas por fila */
+                margin-right: 20px;
+                /* Margen derecho para separar las tarjetas */
+                margin-bottom: 20px;
+                /* Margen inferior para separar las filas */
+                float: left;
+                /* Para que las tarjetas se alineen en una fila */
+            }
+            #nSuper {
+                margin-left: -24px;
+                margin-top: -20px;
+            }
+
+            .navbar-nav {
+                flex-direction: column;
+            }
+
+            .navbar-nav .nav-link {
+                padding: 0.5rem 0;
+            }
+
+            .miImg {
+                width: 90%;
+            }
+
+            .metro {
+                font-size: 24px;
+            }
+
+            .miicon {
+                transform: scale(0.68);
+                margin-top: -4px;
+                margin-right: -6px;
+            }
+
+            .minavcar {
+                display: flex;
+                justify-content: flex-start;
+                width: 35%;
+            }
+
+            .miBtnC {
+                z-index: 101;
+                margin-left: 0px;
+            }
+
+            .search-icon {
+                width: 16px;
+                height: 16px;
+                fill: currentColor;
+            }
+
+            /* Estilo para el icono del carrito */
+            .cart-icon {
+                width: 16px;
+                height: 16px;
+                fill: currentColor;
+            }
+        }
+    </style>
+    <header class="p-3 fixed-top" style="background: black; width: 100%; z-index: 100;">
+        <div class="container" style="margin-top: 12px; margin-bottom: 15px;">
+            <div class="row" style="width: 100%;">
+                <div class="col-md-auto">
+                    <!-- División con logo y texto -->
+                    <div class="d-flex align-items-center">
+                        <div id="nSuper">
+                            <a href="{{ url_for('auth.miInicio') }}" style="display: flex; text-decoration: none;">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="miicon" height="48" fill="#fff"
+                                    width="48">
+                                    <path
+                                        d="M42 22.05V39q0 1.2-.9 2.1-.9.9-2.1.9H8.95q-1.2 0-2.1-.9-.9-.9-.9-2.1V22.05q-1.4-1.2-1.85-2.95-.45-1.75.1-3.5l2.15-6.75q.4-1.35 1.4-2.1 1-.75 2.3-.75H37.7q1.4 0 2.45.775 1.05.775 1.45 2.075l2.2 6.75q.55 1.75.075 3.5Q43.4 20.85 42 22.05ZM28.5 20.5q1.45 0 2.45-.95 1-.95.8-2.3L30.5 9h-5v8.25q0 1.3.85 2.275.85.975 2.15.975Zm-9.35 0q1.4 0 2.375-.95.975-.95.975-2.3V9h-5l-1.25 8.25q-.2 1.3.7 2.275.9.975 2.2.975Zm-9.1 0q1.2 0 2.075-.825.875-.825 1.025-2.025L14.45 9h-5l-2.3 7.3q-.5 1.55.4 2.875t2.5 1.325Zm27.85 0q1.6 0 2.525-1.3.925-1.3.425-2.9L38.55 9h-5l1.3 8.65q.15 1.2 1.025 2.025.875.825 2.025.825ZM8.95 39H39V23.45q.05.05-.325.05H37.9q-1.25 0-2.375-.525T33.3 21.35q-.8 1-2 1.575t-2.65.575q-1.5 0-2.575-.425Q25 22.65 24 21.65q-.75.9-1.9 1.375t-2.6.475q-1.55 0-2.75-.55t-2.05-1.6q-1.2 1.05-2.35 1.6-1.15.55-2.3.55h-.675q-.325 0-.425-.05V39ZM39 39H8.95 39Z" />
+                                </svg>
+                                <h1 style="margin-top: 5px; color: white;">Metrópolis</h1>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-auto miBtnB" style="width: 65%;">
+                    <!-- División con barra de búsqueda -->
+                    <div class="input-group" style="margin-top: 2px;">
+                        <span class="input-group-text" id="basic-addon1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-search" viewBox="0 0 16 16">
+                                <path
+                                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0">
+                                </path>
+                            </svg>
+                        </span>
+                        <input type="search" class="form-control" id="search-input" placeholder="Buscar: Samsung S24"
+                            aria-label="Search" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="col-md-auto minavcar">
+                    <!-- Botón de búsqueda -->
+                    <button id="miBoton" type="button" class="miBtnSearch btn" style="margin-top: 2px;"
+                        onclick="buscarProducto()">Buscar</button>
+
+                    <div class="miBtnC">
+                        <a href="carrito-compras.html">
+                            <button type="button" class="btn btn-primary position-relative "
+                                style="height: 41px; margin-top: 2px;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-cart2 cart-icon" viewBox="0 0 16 16">
+                                    <path
+                                        d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5M3.14 5l1.25 5h8.22l1.25-5zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0m9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0">
+                                    </path>
+                                </svg>
+                                <span
+                                    class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                                    <span class="visually-hidden">New alerts</span>
+                                </span>
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <div class="d-none d-md-block  nav-scroller py-1 mb-2 border-bottom border-top">
+            <nav class="nav nav-underline justify-content-between">
+                <a class="nav-item nav-link minav link-body-emphasis active" href="#">
+                    <font style="color: white; vertical-align: inherit;">
+                        <font style="color: white; vertical-align: inherit;">Celulares</font>
+                    </font>
+                </a>
+                <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                    <font style="color: white; vertical-align: inherit;">
+                        <font style="color: white; vertical-align: inherit;">Computadores</font>
+                    </font>
+                </a>
+                <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                    <font style="color: white; vertical-align: inherit;">
+                        <font style="color: white; vertical-align: inherit;">Electrodomesticos</font>
+                    </font>
+                </a>
+                <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                    <font style="color: white; vertical-align: inherit;">
+                        <font style="color: white; vertical-align: inherit;">Televisores</font>
+                    </font>
+                </a>
+                <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                    <font style="color: white; vertical-align: inherit;">
+                        <font style="color: white; vertical-align: inherit;">Accesorios</font>
+                    </font>
+                </a>
+                <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                    <font style="color: white; vertical-align: inherit;">
+                        <font style="color: white; vertical-align: inherit;">Videojuegos</font>
+                    </font>
+                </a>
+                <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                    <font style="color: white; vertical-align: inherit;">
+                        <font style="color: white; vertical-align: inherit;">Audio</font>
+                    </font>
+                </a>
+                <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                    <font style="color: white; vertical-align: inherit;">
+                        <font style="color: white; vertical-align: inherit;">Camaras</font>
+                    </font>
+                </a>
+                <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                    <font style="color: white; vertical-align: inherit;">
+                        <font style="color: white; vertical-align: inherit;">Hogar</font>
+                    </font>
+                </a>
+                <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                    <font style="color: white; vertical-align: inherit;">
+                        <font style="color: white; vertical-align: inherit;">Mercado</font>
+                    </font>
+                </a>
+                <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                    <font style="color: white; vertical-align: inherit;">
+                        <font style="color: white; vertical-align: inherit;">Juguetes</font>
+                    </font>
+                </a>
+                <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                    <font style="color: white; vertical-align: inherit;">
+                        <font style="color: white; vertical-align: inherit;">Deportes</font>
+                    </font>
+                </a>
+            </nav>
+        </div>
+
+
+
+        <div class="d-md-none">
+            <!-- Este div es visible solo en dispositivos pequeños (menos de md) -->
+            <!-- Tu segundo nav con carrusel aquí -->
+            <div id="carouselExampleIndicators" class="carousel slide">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="d-flex justify-content-around">
+                            <a class="nav-item nav-link minav link-body-emphasis active" href="#">
+                                <font style="color: white; vertical-align: inherit;">
+                                    <font style="color: white; vertical-align: inherit; font-size: 13px;">Celulares
+                                    </font>
+                                </font>
+                            </a>
+                            <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                                <font style="color: white; vertical-align: inherit;">
+                                    <font style="color: white; vertical-align: inherit; font-size: 13px;">Computadores
+                                    </font>
+                                </font>
+                            </a>
+                            <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                                <font style="color: white; vertical-align: inherit;">
+                                    <font style="color: white; vertical-align: inherit; font-size: 13px;">
+                                        Electrodomesticos</font>
+                                </font>
+                            </a>
+                            <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                                <font style="color: white; vertical-align: inherit;">
+                                    <font style="color: white; vertical-align: inherit; font-size: 13px;">Televisores
+                                    </font>
+                                </font>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="d-flex justify-content-around">
+                            <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                                <font style="color: white; vertical-align: inherit;">
+                                    <font style="color: white; vertical-align: inherit; font-size: 13px;">Accesorios
+                                    </font>
+                                </font>
+                            </a>
+                            <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                                <font style="color: white; vertical-align: inherit;">
+                                    <font style="color: white; vertical-align: inherit; font-size: 13px;">Videojuegos
+                                    </font>
+                                </font>
+                            </a>
+                            <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                                <font style="color: white; vertical-align: inherit;">
+                                    <font style="color: white; vertical-align: inherit; font-size: 13px;">Audio</font>
+                                </font>
+                            </a>
+                            <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                                <font style="color: white; vertical-align: inherit;">
+                                    <font style="color: white; vertical-align: inherit; font-size: 13px;">Camaras</font>
+                                </font>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <div class="d-flex justify-content-around">
+                            <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                                <font style="color: white; vertical-align: inherit;">
+                                    <font style="color: white; vertical-align: inherit; font-size: 13px;">Hogar</font>
+                                </font>
+                            </a>
+                            <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                                <font style="color: white; vertical-align: inherit;">
+                                    <font style="color: white; vertical-align: inherit; font-size: 13px;">Mercado</font>
+                                </font>
+                            </a>
+                            <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                                <font style="color: white; vertical-align: inherit;">
+                                    <font style="color: white; vertical-align: inherit; font-size: 13px;">Juguetes
+                                    </font>
+                                </font>
+                            </a>
+                            <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                                <font style="color: white; vertical-align: inherit;">
+                                    <font style="color: white; vertical-align: inherit; font-size: 13px;">Deportes
+                                    </font>
+                                </font>
+                            </a>
+
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true" style="margin-left: -47;"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true" style="margin-right: -21px;"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+    </header>
+    <div style="display: flex;">
+        <div style="margin-top: 12rem; display: flex;">
+            <div>
+                <!-- Aquí se agregará una fila para mostrar los resultados de la búsqueda -->
+                <div id="search-results-row row">
+                    <div>
+                        <div class=" miCard col" id="card-container" >
+                            <div id="original-cards" class="miCard1" style="display: flex; flex-wrap: wrap;">
+                                {% for producto in resultados %}
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='img/' ~ producto.img) }}"
+                                        class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{producto.nombre}}</h5>
+                                        <p class="card-text" style="font-size: 13px; margin-bottom: 5px;">
+                                            {{producto.descripcion}}</p>
+                                        <p class="card-text">${{producto.precio}}</p>
+                                        {% if producto.cantidad < 1 %} <p style="color: red; font-size: small;">No hay
+                                            stock</p>
+                                            {% endif %} <form
+                                                action="{{ url_for('carritos.agregar_al_carrito', id = producto.idProd) }}"
+                                                method="post">
+                                                <button type="submit" class="btn btn-primary btn-sm">Agregar al
+                                                    Carrito</button>
+                                            </form>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Primera fila -->
+                    <div class="row first-row"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div class=" miCard" id="card-container" style=" margin-left: 50px;">
+            <div id="original-cards" class="miCard1" style="display: flex; flex-wrap: wrap; justify-content: center;">
+                {% for producto in data %}
+                <div class="card">
+                    <img src="{{ url_for('static', filename='img/' ~ producto.img) }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{producto.nombre}}</h5>
+                        <p class="card-text" style="font-size: 13px; margin-bottom: 5px;">{{producto.descripcion}}</p>
+                        <p class="card-text">${{producto.precio}}</p>
+                        {% if producto.cantidad < 1 %} <p style="color: red; font-size: small; margin-top: -12px;
+                        margin-bottom: 10px;">*No hay stock*</p>
+                            {% endif %}
+                           
+                    </div><form action="{{ url_for('carritos.agregar_al_carrito', id = producto.idProd) }}"
+                                method="post" class="miForm2">
+                                <button type="submit" class="btn btn-primary btn-sm">Agregar al Carrito</button>
+                            </form>
+                </div> 
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        function buscarProducto() {
+
+
+
+            var input = document.getElementById("search-input").value.toLowerCase();
+            var cards = document.getElementsByClassName("card");
+            var searchResultsRow = document.getElementById("search-results-row");
+
+            // Crear un nuevo contenedor para los resultados de búsqueda
+            var newSearchResultsRow = document.createElement("div");
+            newSearchResultsRow.id = "search-results-row";
+
+            for (var i = 0; i < cards.length; i++) {
+                var card = cards[i];
+                var title = card.getElementsByClassName("card-title")[0];
+                var titleText = title.textContent.toLowerCase();
+
+                if (titleText.includes(input)) {
+                    // Agregar tarjetas que coinciden con la búsqueda al nuevo contenedor
+                    newSearchResultsRow.appendChild(card.cloneNode(true));
+                }
+            }
+
+            // Reemplazar el contenedor anterior con el nuevo contenedor que contiene los resultados de búsqueda
+            searchResultsRow.parentNode.replaceChild(newSearchResultsRow, searchResultsRow);
+        }
+
+
+
+    </script>
+
+    <!-- <a href="{{ url_for('producto.add') }}">Agregar Producto</a> -->
+
+</body>
+
+</html>

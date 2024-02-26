@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+
+  <script src="{{ url_for('static', filename='jQuery/jquery-3.7.1.js')}}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+
+  <script
+    src="{{ url_for('static', filename='bootstrap-5.3.3/bootstrap-5.3.3/dist/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+  <title>Document</title>
+</head>
+
+<style>
+  /* Estilos para pantallas grandes */
+  @media (min-width: 768px) {
+    .navbar-nav {
+      display: flex;
+      justify-content: center;
+    }
+
+    .navbar-nav .nav-link {
+      padding-right: 1rem;
+      padding-left: 1rem;
+    }
+  }
+
+  /* Estilos para pantallas pequeñas */
+  @media (max-width: 525px) {
+    #nSuper{
+      margin-left: -24px;
+    margin-top: -20px;
+    }
+    .navbar-nav {
+      flex-direction: column;
+    }
+
+    .navbar-nav .nav-link {
+      padding: 0.5rem 0;
+    }
+
+    .miImg {
+      width: 90%;
+    }
+    .metro{
+      font-size: 24px;
+    }
+    .miicon{
+      transform: scale(0.68);
+      margin-top: -4px;
+      margin-right: -6px;
+    }
+    .minavcar {
+      display: flex;
+      justify-content: flex-start;
+      width: 35%;
+  }
+  .miBtnC {
+    z-index: 101;
+    margin-left: 0px;
+}
+.search-icon {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+/* Estilo para el icono del carrito */
+.cart-icon {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+  }
+</style>
+
+<body style="background-color: black;">
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="bootstrap" viewBox="0 0 118 94">
+      <title>Bootstrap</title>
+      <path fill-rule="evenodd" clip-rule="evenodd"
+        d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z">
+      </path>
+    </symbol>
+    <symbol id="home" viewBox="0 0 16 16">
+      <path
+        d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
+    </symbol>
+    <symbol id="speedometer2" viewBox="0 0 16 16">
+      <path
+        d="M8 4a.5.5 0 0 1 .5.5V6a.5.5 0 0 1-1 0V4.5A.5.5 0 0 1 8 4zM3.732 5.732a.5.5 0 0 1 .707 0l.915.914a.5.5 0 1 1-.708.708l-.914-.915a.5.5 0 0 1 0-.707zM2 10a.5.5 0 0 1 .5-.5h1.586a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 10zm9.5 0a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H12a.5.5 0 0 1-.5-.5zm.754-4.246a.389.389 0 0 0-.527-.02L7.547 9.31a.91.91 0 1 0 1.302 1.258l3.434-4.297a.389.389 0 0 0-.029-.518z" />
+      <path fill-rule="evenodd"
+        d="M0 10a8 8 0 1 1 15.547 2.661c-.442 1.253-1.845 1.602-2.932 1.25C11.309 13.488 9.475 13 8 13c-1.474 0-3.31.488-4.615.911-1.087.352-2.49.003-2.932-1.25A7.988 7.988 0 0 1 0 10zm8-7a7 7 0 0 0-6.603 9.329c.203.575.923.876 1.68.63C4.397 12.533 6.358 12 8 12s3.604.532 4.923.96c.757.245 1.477-.056 1.68-.631A7 7 0 0 0 8 3z" />
+    </symbol>
+    <symbol id="table" viewBox="0 0 16 16">
+      <path
+        d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z" />
+    </symbol>
+    <symbol id="people-circle" viewBox="0 0 16 16">
+      <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+      <path fill-rule="evenodd"
+        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+    </symbol>
+    <symbol id="grid" viewBox="0 0 16 16">
+      <path
+        d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
+    </symbol>
+    <symbol id="collection" viewBox="0 0 16 16">
+      <path
+        d="M2.5 3.5a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-11zm2-2a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM0 13a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 16 13V6a1.5 1.5 0 0 0-1.5-1.5h-13A1.5 1.5 0 0 0 0 6v7zm1.5.5A.5.5 0 0 1 1 13V6a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-13z" />
+    </symbol>
+
+  </svg>
+
+  <header class="p-3 fixed-top" style="background: black; width: 100%; z-index: 100;">
+    <div class="container" style="margin-top: 12px; margin-bottom: 15px;">
+      <div class="row" style="width: 100%;">
+          <div class="col-md-auto">
+              <!-- División con logo y texto -->
+              <div class="d-flex align-items-center">
+                  <div id="nSuper">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="miicon" height="48" fill="#fff" width="48">
+                          <path d="M42 22.05V39q0 1.2-.9 2.1-.9.9-2.1.9H8.95q-1.2 0-2.1-.9-.9-.9-.9-2.1V22.05q-1.4-1.2-1.85-2.95-.45-1.75.1-3.5l2.15-6.75q.4-1.35 1.4-2.1 1-.75 2.3-.75H37.7q1.4 0 2.45.775 1.05.775 1.45 2.075l2.2 6.75q.55 1.75.075 3.5Q43.4 20.85 42 22.05ZM28.5 20.5q1.45 0 2.45-.95 1-.95.8-2.3L30.5 9h-5v8.25q0 1.3.85 2.275.85.975 2.15.975Zm-9.35 0q1.4 0 2.375-.95.975-.95.975-2.3V9h-5l-1.25 8.25q-.2 1.3.7 2.275.9.975 2.2.975Zm-9.1 0q1.2 0 2.075-.825.875-.825 1.025-2.025L14.45 9h-5l-2.3 7.3q-.5 1.55.4 2.875t2.5 1.325Zm27.85 0q1.6 0 2.525-1.3.925-1.3.425-2.9L38.55 9h-5l1.3 8.65q.15 1.2 1.025 2.025.875.825 2.025.825ZM8.95 39H39V23.45q.05.05-.325.05H37.9q-1.25 0-2.375-.525T33.3 21.35q-.8 1-2 1.575t-2.65.575q-1.5 0-2.575-.425Q25 22.65 24 21.65q-.75.9-1.9 1.375t-2.6.475q-1.55 0-2.75-.55t-2.05-1.6q-1.2 1.05-2.35 1.6-1.15.55-2.3.55h-.675q-.325 0-.425-.05V39ZM39 39H8.95 39Z" />
+                      </svg>
+                      <h1 style="margin-top: 5px; color: white;" class="metro">Metrópolis</h1>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-auto miBtnB" style="width: 65%;">
+              <!-- División con barra de búsqueda -->
+              <div class="input-group" style="margin-top: 2px;">
+                  <span class="input-group-text" id="basic-addon1">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"></path>
+                      </svg>
+                  </span>
+                  <input type="search" class="form-control" id="search-input" placeholder="Buscar: Samsung S24" aria-label="Search" aria-describedby="basic-addon1">
+              </div>
+          </div>
+          <div class="col-md-auto minavcar">
+              <!-- Botón de búsqueda -->
+              <button id="miBoton" type="button" class="miBtnSearch btn" style="margin-top: 2px;" onclick="buscarProducto()">Buscar</button>
+  
+              <div class="miBtnC">
+                  <a href="carrito-compras.html">
+                      <button type="button" class="btn btn-primary position-relative " style="height: 41px; margin-top: 2px;">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart2 cart-icon" viewBox="0 0 16 16">
+                              <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5M3.14 5l1.25 5h8.22l1.25-5zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0m9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0"></path>
+                          </svg>
+                          <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                              <span class="visually-hidden">New alerts</span>
+                          </span>
+                      </button>
+                  </a>
+              </div>
+          </div>
+      </div>
+  </div>
+  
+    <br>
+    <div class="d-none d-md-block  nav-scroller py-1 mb-2 border-bottom border-top">
+      <nav class="nav nav-underline justify-content-between">
+        <a class="nav-item nav-link minav link-body-emphasis active" href="#">
+          <font style="color: white; vertical-align: inherit;">
+            <font style="color: white; vertical-align: inherit;">Celulares</font>
+          </font>
+        </a>
+        <a class="nav-item nav-link minav link-body-emphasis" href="#">
+          <font style="color: white; vertical-align: inherit;">
+            <font style="color: white; vertical-align: inherit;">Computadores</font>
+          </font>
+        </a>
+        <a class="nav-item nav-link minav link-body-emphasis" href="#">
+          <font style="color: white; vertical-align: inherit;">
+            <font style="color: white; vertical-align: inherit;">Electrodomesticos</font>
+          </font>
+        </a>
+        <a class="nav-item nav-link minav link-body-emphasis" href="#">
+          <font style="color: white; vertical-align: inherit;">
+            <font style="color: white; vertical-align: inherit;">Televisores</font>
+          </font>
+        </a>
+        <a class="nav-item nav-link minav link-body-emphasis" href="#">
+          <font style="color: white; vertical-align: inherit;">
+            <font style="color: white; vertical-align: inherit;">Accesorios</font>
+          </font>
+        </a>
+        <a class="nav-item nav-link minav link-body-emphasis" href="#">
+          <font style="color: white; vertical-align: inherit;">
+            <font style="color: white; vertical-align: inherit;">Videojuegos</font>
+          </font>
+        </a>
+        <a class="nav-item nav-link minav link-body-emphasis" href="#">
+          <font style="color: white; vertical-align: inherit;">
+            <font style="color: white; vertical-align: inherit;">Audio</font>
+          </font>
+        </a>
+        <a class="nav-item nav-link minav link-body-emphasis" href="#">
+          <font style="color: white; vertical-align: inherit;">
+            <font style="color: white; vertical-align: inherit;">Camaras</font>
+          </font>
+        </a>
+        <a class="nav-item nav-link minav link-body-emphasis" href="#">
+          <font style="color: white; vertical-align: inherit;">
+            <font style="color: white; vertical-align: inherit;">Hogar</font>
+          </font>
+        </a>
+        <a class="nav-item nav-link minav link-body-emphasis" href="#">
+          <font style="color: white; vertical-align: inherit;">
+            <font style="color: white; vertical-align: inherit;">Mercado</font>
+          </font>
+        </a>
+        <a class="nav-item nav-link minav link-body-emphasis" href="#">
+          <font style="color: white; vertical-align: inherit;">
+            <font style="color: white; vertical-align: inherit;">Juguetes</font>
+          </font>
+        </a>
+        <a class="nav-item nav-link minav link-body-emphasis" href="#">
+          <font style="color: white; vertical-align: inherit;">
+            <font style="color: white; vertical-align: inherit;">Deportes</font>
+          </font>
+        </a>
+      </nav>
+    </div>
+
+
+
+    <div class="d-md-none">
+      <!-- Este div es visible solo en dispositivos pequeños (menos de md) -->
+      <!-- Tu segundo nav con carrusel aquí -->
+      <div id="carouselExampleIndicators" class="carousel slide">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="d-flex justify-content-around">
+              <a class="nav-item nav-link minav link-body-emphasis active" href="#">
+                <font style="color: white; vertical-align: inherit;">
+                  <font style="color: white; vertical-align: inherit; font-size: 13px;">Celulares</font>
+                </font>
+              </a>
+              <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                <font style="color: white; vertical-align: inherit;">
+                  <font style="color: white; vertical-align: inherit; font-size: 13px;">Computadores</font>
+                </font>
+              </a>
+              <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                <font style="color: white; vertical-align: inherit;">
+                  <font style="color: white; vertical-align: inherit; font-size: 13px;">Electrodomesticos</font>
+                </font>
+              </a>
+              <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                <font style="color: white; vertical-align: inherit;">
+                  <font style="color: white; vertical-align: inherit; font-size: 13px;">Televisores</font>
+                </font>
+              </a>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="d-flex justify-content-around">
+              <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                <font style="color: white; vertical-align: inherit;">
+                  <font style="color: white; vertical-align: inherit; font-size: 13px;">Accesorios</font>
+                </font>
+              </a>
+              <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                <font style="color: white; vertical-align: inherit;">
+                  <font style="color: white; vertical-align: inherit; font-size: 13px;">Videojuegos</font>
+                </font>
+              </a>
+              <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                <font style="color: white; vertical-align: inherit;">
+                  <font style="color: white; vertical-align: inherit; font-size: 13px;">Audio</font>
+                </font>
+              </a>
+              <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                <font style="color: white; vertical-align: inherit;">
+                  <font style="color: white; vertical-align: inherit; font-size: 13px;">Camaras</font>
+                </font>
+              </a>
+            </div>
+          </div>
+
+          <div class="carousel-item"  >
+            <div class="d-flex justify-content-around" >
+              <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                <font style="color: white; vertical-align: inherit;">
+                  <font style="color: white; vertical-align: inherit; font-size: 13px;">Hogar</font>
+                </font>
+              </a>
+              <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                <font style="color: white; vertical-align: inherit;">
+                  <font style="color: white; vertical-align: inherit; font-size: 13px;">Mercado</font>
+                </font>
+              </a>
+              <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                <font style="color: white; vertical-align: inherit;">
+                  <font style="color: white; vertical-align: inherit; font-size: 13px;">Juguetes</font>
+                </font>
+              </a>
+              <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                <font style="color: white; vertical-align: inherit;">
+                  <font style="color: white; vertical-align: inherit; font-size: 13px;">Deportes</font>
+                </font>
+              </a>
+
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true" style="margin-left: -47;"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="next" >
+            <span class="carousel-control-next-icon" aria-hidden="true" style="margin-right: -21px;"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+
+
+
+
+
+
+  </header>
+  <style>
+    #light {
+      z-index: 101;
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      background-color: rgba(106, 118, 119, 0.36);
+      /* Color y transparencia del halo de luz */
+      border-radius: 50%;
+      pointer-events: none;
+      /* Permite que el halo de luz no bloquee eventos del ratón */
+      filter: blur(30px);
+      /* Aplicamos un filtro de desenfoque */
+      display: none;
+      /* Inicialmente oculto */
+    }
+  </style>
+  <div style="display: flex;">
+
+    <div style=" margin-top: 11rem; background-color: rgb(0, 0, 0);">
+      <div>
+        <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active" data-bs-interval="2500">
+              <img src="{{ url_for('static', filename='img/Captura de pantalla 2023-03-21 073922.png')}}"
+                class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item" data-bs-interval="2500">
+              <img src="{{ url_for('static', filename='img/Captura de pantalla 2023-03-21 074110.png')}}"
+                class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item" data-bs-interval="2500">
+              <img src="{{ url_for('static', filename='img/Captura de pantalla 2023-03-21 074046.png')}}"
+                class="d-block w-100" alt="...">
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+
+
+      <div class="container-fluid d-flex justify-content-center align-items-center">
+        <div class="row miMenu"
+          style="margin-top: 2rem; overflow-x: auto; white-space: nowrap; padding-top: 20px; justify-content: center;">
+
+          <div class="col-lg-1 col-md-2 col-sm-3 col-4 miCont1">
+            <div class="img-container miC">
+              <img src="{{ url_for('static', filename='img/1.png')}}" class="d-block miC rounded-circle" alt="...">
+              <div class="overlay">
+                <h5 class="fw-normal">Computadores</h5>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-1 col-md-2 col-sm-3 col-4 miCont1">
+            <div class="img-container miC">
+              <img src="{{ url_for('static', filename='img/Captura de pantalla 2023-05-22 211728.png')}}"
+                class="d-block miC rounded-circle" alt="...">
+              <div class="overlay">
+                <h5 class="fw-normal">Televisores</h5>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-1 col-md-2 col-sm-3 col-4 miCont1">
+            <div class="img-container miC">
+              <img
+                src="{{ url_for('static', filename='img/Imagen de WhatsApp 2024-02-11 a las 15.12.47_26063a94.jpg')}}"
+                class="d-block miC rounded-circle" alt="...">
+              <div class="overlay">
+                <h5 class="fw-normal">Celulares</h5>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-1 col-md-2 col-sm-3 col-4 miCont1">
+            <div class="img-container miC">
+              <img src="{{ url_for('static', filename='img/Captura de pantalla 2023-03-21 081915.png')}}"
+                class="d-block miC rounded-circle" alt="...">
+              <div class="overlay">
+                <h5 class="fw-normal">Licoreria</h5>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-1 col-md-2 col-sm-3 col-4 miCont1">
+            <div class="img-container miC">
+              <img src="{{ url_for('static', filename='img/Captura de pantalla 2023-03-21 080757.png')}}"
+                class="d-block miC rounded-circle" alt="...">
+              <div class="overlay">
+                <h5 class="fw-normal">Electrodomesticos</h5>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-1 col-md-2 col-sm-3 col-4 miCont1">
+            <div class="img-container miC">
+              <img src="{{ url_for('static', filename='img/Captura de pantalla 2023-03-21 081242.png')}}"
+                class="d-block miC rounded-circle" alt="...">
+              <div class="overlay">
+                <h5 class="fw-normal">Papeleria</h5>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-1 col-md-2 col-sm-3 col-4 miCont1">
+            <div class="img-container miC">
+              <img src="{{ url_for('static', filename='img/Captura de pantalla 2023-03-21 080843.png')}}"
+                class="d-block miC rounded-circle" alt="...">
+              <div class="overlay">
+                <center>
+                  <h5 class="fw-normal">Frutas y Verduras</h5>
+                </center>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-1 col-md-2 col-sm-3 col-4 miCont1">
+            <div class="img-container miC">
+              <img src="{{ url_for('static', filename='img/Captura de pantalla 2024-02-11 185505.png')}}"
+                class="d-block miC rounded-circle" alt="...">
+              <div class="overlay">
+                <h5 class="fw-normal">Jugueteria</h5>
+              </div>
+            </div>
+          </div>
+
+          <!-- Agrega los otros elementos de la misma manera -->
+
+          <div class="col-lg-2 d-lg-block d-none"></div> <!-- Espacio adicional solo en pantallas grandes -->
+        </div>
+      </div>
+
+
+      <hr class="featurette-divider" style="margin-top: 2rem; margin-bottom: 2rem;">
+      <div class="row featurette" style="background-color: black; color: white; padding: 20px;">
+        <div class="col-md-7" style="padding: 2rem;">
+          <h2 class="featurette-heading fw-normal lh-1"><b>Encuentra todo lo que buscas en un solo lugar.</b> </h2>
+          <p class="lead">Encuentra una amplia variedad de productos que te encantarán.
+            <br>¡Haz clic <a href="{{ url_for('producto.index1') }}"
+              style="color: rgb(30, 68, 255); text-decoration: underline;">aquí</a> para comenzar!
+          </p>
+          <br>
+          <a href="{{ url_for('producto.index')}}"><button class="btn btn-primary text-center" style="width: 80%;">Ver
+              Productos</button></a>
+        </div>
+        <div class="col-md-5">
+          <img src="{{ url_for('static', filename='img/Captura de pantalla 2024-02-19 093855.png')}}" width="600px"
+            class="d-block miImg " alt="...">
+
+        </div>
+      </div>
+
+
+      <div id="light"></div>
+
+      <script>document.addEventListener('mousemove', function (event) {
+          const light = document.getElementById('light');
+
+          // Posiciona el halo de luz alrededor del mouse
+          light.style.left = event.pageX - 50 + 'px'; // Ajustamos para centrar el halo
+          light.style.top = event.pageY - 50 + 'px'; // Ajustamos para centrar el halo
+
+          // Mostramos el halo de luz
+          light.style.display = 'block';
+
+          // Ocultamos el halo de luz después de un tiempo (puedes ajustar el tiempo según tus necesidades)
+          setTimeout(function () {
+            light.style.display = 'none';
+          }, 500); // 500 milisegundos (0.5 segundos)
+        });
+
+
+        function buscarProducto() {
+          var input = document.getElementById("search-input").value.toLowerCase();
+          var cards = document.getElementsByClassName("card");
+
+          for (var i = 0; i < cards.length; i++) {
+            var card = cards[i];
+            var title = card.getElementsByClassName("card-title")[0];
+            var titleText = title.textContent.toLowerCase();
+
+            if (titleText.includes(input)) {
+              card.style.display = "block";
+            } else {
+              card.style.display = "none";
+            }
+          }
+        }
+
+      </script>
+
+</body>
+
+</html>

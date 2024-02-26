@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Editar Detalle Venta</title>
+</head>
+<body>
+    <h1>Editar Detalle Venta</h1>
+    <form action="{{ url_for('detalleVenta.edit', idDV=detalleVenta.idDV) }}" method="post">
+        <label for="cantidadDV">Cantidad:</label>
+        <input type="text" id="cantidadDV" name="cantidadDV" value="{{ detalleVenta.cantidadDV }}" required>
+        <label for="subTotalDV">Subtotal:</label>
+        <input type="text" id="subTotalDV" name="subTotalDV" value="{{ detalleVenta.subTotalDV }}" required>
+        <label for="idProd">Id Producto:</label>
+        <input type="text" id="idProd" name="idProd" value="{{ detalleVenta.idProd }}" required>
+        <label for="idFV">Id Factura Venta:</label>
+        <input type="text" id="idFV" name="idFV" value="{{ detalleVenta.idFV }}" required>
+        
+        <button type="submit">Actualizar Factura Venta</button>
+    </form>
+</body>
+</html>

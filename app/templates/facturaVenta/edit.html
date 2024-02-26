@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Editar Factura Venta</title>
+</head>
+<body>
+    <h1>Editar Factura Venta</h1>
+    <form action="{{ url_for('facturaVenta.edit', idFV=facturaVenta.idFV) }}" method="post">
+        <label for="dtoFV">Descuento:</label>
+        <input type="text" id="dtoFV" name="dtoFV" value="{{ facturaVenta.dtoFV }}" required>
+        <label for="fechaFV">Fecha:</label>
+        <input type="text" id="fechaFV" name="fechaFV" value="{{ facturaVenta.fechaFV }}" required>
+        <label for="totalFV">Total:</label>
+        <input type="text" id="totalFV" name="totalFV" value="{{ facturaVenta.totalFV }}" required>
+        <label for="idAdmin">Id Administrador:</label>
+        <input type="text" id="idAdmin" name="idAdmin" value="{{ facturaVenta.idAdmin }}" required>
+        <label for="idCliente">Id Cliente:</label>
+        <input type="text" id="idCliente" name="idCliente" value="{{ facturaVenta.idCliente }}" required>
+        
+        <button type="submit">Actualizar Cliente</button>
+    </form>
+</body>
+</html>

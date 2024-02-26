@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> -->
+    <title>Agregar Factura Venta</title>
+</head>
+<body>
+    <h1>Agregar Factura Venta</h1>
+    <form action="{{ url_for('facturaVenta.add') }}" method="post">
+        <label for="dtoFV">Descuento:</label>
+        <input type="text" id="dtoFV" name="dtoFV" required>
+        
+        
+        <label for="totalFV">Total:</label>
+        <input type="text" id="totalFV" name="totalFV" required>
+        <select id="idAdmin" name="idAdmin">
+            {% for administrador in data %}
+                <option value="{{ administrador.idAdmin }}">{{ administrador.nombre }}</option>
+            {% endfor %}
+        </select>
+        <select id="idCliente" name="idCliente">
+            {% for cliente in cliente %}
+                <option value="{{ cliente.idCliente }}">{{ cliente.nombre }}</option>
+            {% endfor %}
+        </select>
+        
+        <button type="submit">Agregar Factura Venta</button>
+    </form>
+</body>
+</html>
