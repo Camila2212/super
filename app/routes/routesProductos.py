@@ -76,7 +76,7 @@ def guardarImg(img):
     img.save(os.path.join(carpetaDestino, img.filename))
 
 
-@bp.route('/filtrar/<tipo>')
+@bp.route('/filtrar/<string:tipo>')
 def filtrar_productos(tipo):
     # Asume que 'data' es una lista de productos
     resultados = Producto.query.filter_by(descripcion=tipo).all()

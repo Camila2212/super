@@ -13,11 +13,12 @@
 
 <body>
     <style>
-        .miForm2{
+        .miForm2 {
             display: flex;
-    justify-content: center;
-    margin-bottom: 17px;
+            justify-content: center;
+            margin-bottom: 17px;
         }
+
         #card-container {
             margin-top: 1rem;
         }
@@ -46,9 +47,11 @@
             margin-right: 10px;
             margin-bottom: 10px;
             margin-left: 10px;
+            min-width: 320px;
         }
 
         .miCard .card {
+            min-width: 320px;
             width: 15%;
             /* Ancho del 20% para que haya cinco tarjetas por fila */
             margin-right: 20px;
@@ -162,6 +165,7 @@
                 float: left;
                 /* Para que las tarjetas se alineen en una fila */
             }
+
             #nSuper {
                 margin-left: -24px;
                 margin-top: -20px;
@@ -249,11 +253,12 @@
                 </div>
                 <div class="col-md-auto minavcar">
                     <!-- Botón de búsqueda -->
-                    <button id="miBoton" type="button" class="miBtnSearch btn" style="margin-top: 2px;"
-                        onclick="buscarProducto()">Buscar</button>
+                    <button id="miBoton" type="button" class="miBtnSearch btn" style="
+                      margin-top: 2px;" onclick="buscarProducto()">Buscar</button>
+
 
                     <div class="miBtnC">
-                        <a href="carrito-compras.html">
+                        <a href="{{url_for('carritos.listar')}}">
                             <button type="button" class="btn btn-primary position-relative "
                                 style="height: 41px; margin-top: 2px;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -276,62 +281,74 @@
         <br>
         <div class="d-none d-md-block  nav-scroller py-1 mb-2 border-bottom border-top">
             <nav class="nav nav-underline justify-content-between">
-                <a class="nav-item nav-link minav link-body-emphasis active" href="#">
+                <a class="nav-item nav-link minav link-body-emphasis active"
+                    href="{{ url_for('producto.filtrar_productos', tipo='Telefono') }}">
                     <font style="color: white; vertical-align: inherit;">
                         <font style="color: white; vertical-align: inherit;">Celulares</font>
                     </font>
                 </a>
-                <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                <a class="nav-item nav-link minav link-body-emphasis"
+                    href="{{ url_for('producto.filtrar_productos', tipo='computador') }}">
                     <font style="color: white; vertical-align: inherit;">
                         <font style="color: white; vertical-align: inherit;">Computadores</font>
                     </font>
                 </a>
-                <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                <a class="nav-item nav-link minav link-body-emphasis"
+                    href="{{ url_for('producto.filtrar_productos', tipo='Electrodomestico') }}">
                     <font style="color: white; vertical-align: inherit;">
                         <font style="color: white; vertical-align: inherit;">Electrodomesticos</font>
                     </font>
                 </a>
-                <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                <a class="nav-item nav-link minav link-body-emphasis"
+                    href="{{ url_for('producto.filtrar_productos', tipo='televisores') }}">
                     <font style="color: white; vertical-align: inherit;">
                         <font style="color: white; vertical-align: inherit;">Televisores</font>
                     </font>
                 </a>
-                <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                <a class="nav-item nav-link minav link-body-emphasis"
+                    href="{{ url_for('producto.filtrar_productos', tipo='Telefono') }}">
                     <font style="color: white; vertical-align: inherit;">
                         <font style="color: white; vertical-align: inherit;">Accesorios</font>
                     </font>
                 </a>
-                <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                <a class="nav-item nav-link minav link-body-emphasis"
+                    href="{{ url_for('producto.filtrar_productos', tipo='Telefono') }}">
                     <font style="color: white; vertical-align: inherit;">
                         <font style="color: white; vertical-align: inherit;">Videojuegos</font>
                     </font>
                 </a>
-                <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                <a class="nav-item nav-link minav link-body-emphasis"
+                    href="{{ url_for('producto.filtrar_productos', tipo='Telefono') }}">
                     <font style="color: white; vertical-align: inherit;">
                         <font style="color: white; vertical-align: inherit;">Audio</font>
                     </font>
                 </a>
-                <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                <a class="nav-item nav-link minav link-body-emphasis"
+                    href="{{ url_for('producto.filtrar_productos', tipo='Telefono') }}">
                     <font style="color: white; vertical-align: inherit;">
                         <font style="color: white; vertical-align: inherit;">Camaras</font>
                     </font>
                 </a>
-                <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                <a class="nav-item nav-link minav link-body-emphasis"
+                    href="{{ url_for('producto.filtrar_productos', tipo='Telefono') }}">
                     <font style="color: white; vertical-align: inherit;">
                         <font style="color: white; vertical-align: inherit;">Hogar</font>
                     </font>
                 </a>
-                <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                <a class="nav-item nav-link minav link-body-emphasis"
+                    href="{{ url_for('producto.filtrar_productos', tipo='Telefono') }}">
                     <font style="color: white; vertical-align: inherit;">
                         <font style="color: white; vertical-align: inherit;">Mercado</font>
                     </font>
                 </a>
-                <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                <a class="nav-item nav-link minav link-body-emphasis"
+                    href="{{ url_for('producto.filtrar_productos', tipo='Telefono') }}">
                     <font style="color: white; vertical-align: inherit;">
                         <font style="color: white; vertical-align: inherit;">Juguetes</font>
                     </font>
                 </a>
-                <a class="nav-item nav-link minav link-body-emphasis" href="#">
+                <a class="nav-item nav-link minav link-body-emphasis"
+                    href="{{ url_for('producto.filtrar_productos', tipo='Telefono') }}">
                     <font style="color: white; vertical-align: inherit;">
                         <font style="color: white; vertical-align: inherit;">Deportes</font>
                     </font>
@@ -451,9 +468,9 @@
         <div style="margin-top: 12rem; display: flex;">
             <div>
                 <!-- Aquí se agregará una fila para mostrar los resultados de la búsqueda -->
-                <div id="search-results-row row">
+                <div id="search-results-row">
                     <div>
-                        <div class=" miCard col" id="card-container" >
+                        <div class=" miCard col" id="card-container">
                             <div id="original-cards" class="miCard1" style="display: flex; flex-wrap: wrap;">
                                 {% for producto in resultados %}
                                 <div class="card">
@@ -498,12 +515,13 @@
                         {% if producto.cantidad < 1 %} <p style="color: red; font-size: small; margin-top: -12px;
                         margin-bottom: 10px;">*No hay stock*</p>
                             {% endif %}
-                           
-                    </div><form action="{{ url_for('carritos.agregar_al_carrito', id = producto.idProd) }}"
-                                method="post" class="miForm2">
-                                <button type="submit" class="btn btn-primary btn-sm">Agregar al Carrito</button>
-                            </form>
-                </div> 
+
+                    </div>
+                    <form action="{{ url_for('carritos.agregar_al_carrito', id = producto.idProd) }}" method="post"
+                        class="miForm2">
+                        <button type="submit" class="btn btn-primary btn-sm">Agregar al Carrito</button>
+                    </form>
+                </div>
                 {% endfor %}
             </div>
         </div>
